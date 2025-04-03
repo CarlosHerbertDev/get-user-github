@@ -2,7 +2,6 @@ import { ReactElement, useEffect, useState } from "react"
 import { getUser } from "../../api/getUser"
 import { ApiData } from "../../interfaces/types"
 
-
 export const GetUserGithub = () : ReactElement => {
     const [nameuser, setNameUser] = useState<string>('')
     const [renderUser, setRenderUser] = useState<ApiData>({})
@@ -46,9 +45,7 @@ export const GetUserGithub = () : ReactElement => {
         }, [nameuser])
         
         function halldeKeyup (e: React.KeyboardEvent<HTMLInputElement>) {
-          const userName = e.target.value
-          console.log(e);
-          
+          const userName = (e.target as HTMLInputElement).value
           const key = e.which || e.keyCode
           const isEnterKeyPressed = key === 13
           if (isEnterKeyPressed) {
@@ -78,7 +75,7 @@ export const GetUserGithub = () : ReactElement => {
   return (
     <div>
         <div>
-            <p>icon</p>
+            <p className="bg-teste">icon</p>
             <p> Perfil <span>Github</span></p>
         </div>       
         <div>
