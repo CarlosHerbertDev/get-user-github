@@ -7,23 +7,38 @@ export const GetUserGithub = () : ReactElement => {
     const [nameuser, setNameUser] = useState<string>('')
     const [renderUser, setRenderUser] = useState<ApiData>({})
     const [error, setError] = useState<string>('')
-
+    const [loading, setLoading] = useState<boolean>(true)
     useEffect(() => {
        const fetchdata = async () => {
 
-            const data = await getUser(nameuser)
-                setRenderUser(data)
+          setLoading(true)
 
-             if (data) {
-                setRenderUser({
-                  name: data.name,
-                  avatar_url: data.avatar_url,
-                  bio: data.bio
-                })
-                setError('')
-              } else if(data === undefined){
-                setError('Nenhum perfil encontrado com esse nome de usuário. Tente novamente')
-              } 
+          try {
+
+            const data = await getUser(nameuser)
+            console.log(renderUser)
+            setLoading(false)
+            setRenderUser(data)
+
+         if (data) {
+            setRenderUser({
+              name: data.name,
+              avatar_url: data.avatar_url,
+              bio: data.bio
+            })
+            setError('')
+          } else if(data === undefined){
+            setError('Nenhum perfil encontrado com esse nome de usuário. Tente novamente')
+          } 
+
+          } catch (error) {
+
+              setError(`Ocorreru o seguinte erro ao carregar os dados: ${error}`)
+            
+          } finally {
+            setLoading(false)
+          }
+
           }    
           
           fetchdata()
@@ -31,7 +46,19 @@ export const GetUserGithub = () : ReactElement => {
         }, [nameuser])
         
         function halldeKeyup (e: React.KeyboardEvent<HTMLInputElement>) {
-          console.log(e)
+          const userName = e.target.value
+          console.log(e);
+          
+          const key = e.which || e.keyCode
+          const isEnterKeyPressed = key === 13
+          if (isEnterKeyPressed) {
+            setNameUser(userName)
+          } 
+
+          if (userName === '' && isEnterKeyPressed) {
+            alert('Atenção! Prenche o input com o nome do usuário')
+          }
+          
           
         }
 
@@ -58,14 +85,19 @@ export const GetUserGithub = () : ReactElement => {
         <input type="text" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
         <span onClick={haddleUser}>&#128269;</span>  
         </div>
-        {renderUser &&
-          
+
+        {loading && 
+               <p>CARREGANDO...</p>
+        }
+        {renderUser && !loading &&
             <div>
                <h1>{renderUser.name}</h1>
                <p>{renderUser.bio? renderUser.bio : 'sem bio'}</p>
                <img src={renderUser.avatar_url} alt="image" />
             </div>
+      
         }
+
         { error !== '' &&
           <p>{error}</p>
         }
