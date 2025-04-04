@@ -1,5 +1,13 @@
-@import "tailwindcss"
+@import "tailwindcss";
 
  @theme {
-      --color-teste : #02384;   
-  } 
+    --color-primary: #1F1F1F;
+  }
+
+
+  @layer base {
+    body {
+     @apply bg-primary;
+    }
+  }
+   

@@ -73,13 +73,13 @@ export const GetUserGithub = () : ReactElement => {
         
 
   return (
-    <div>
+    <div className="bg-black text-white">
         <div>
-            <p className="bg-teste">icon</p>
+            <p>icon</p>
             <p> Perfil <span>Github</span></p>
         </div>       
         <div>
-        <input type="text" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
+        <input className="text-white"type="text" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
         <span onClick={haddleUser}>&#128269;</span>  
         </div>
 
