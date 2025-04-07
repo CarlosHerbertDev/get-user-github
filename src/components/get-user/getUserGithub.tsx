@@ -1,6 +1,10 @@
 import { ReactElement, useEffect, useState } from "react"
 import { getUser } from "../../api/getUser"
 import { ApiData } from "../../interfaces/types"
+import  Github  from "../../assets/icon_git.png";
+import  Camada  from "../../assets/Camada.png";
+import  Elipse1  from "../../assets/Ellipse_1.png";
+import  Elipse2  from "../../assets/Ellipse_2.png";
 
 export const GetUserGithub = () : ReactElement => {
     const [nameuser, setNameUser] = useState<string>('')
@@ -54,6 +58,7 @@ export const GetUserGithub = () : ReactElement => {
 
           if (userName === '' && isEnterKeyPressed) {
             alert('Atenção! Prenche o input com o nome do usuário')
+            setError('')
           }
           
           
@@ -65,18 +70,28 @@ export const GetUserGithub = () : ReactElement => {
 
           if (user === '') {
             alert('Atenção! Prenche o input com o nome do usuário')
+            setError('')
           } else {
             setNameUser(user)
           }
           
         }
         
-
   return (
-    <div className="bg-black text-white">
-        <div>
-            <p>icon</p>
-            <p> Perfil <span>Github</span></p>
+    <main className="max-w-[1440px]">
+    <div className="absolute top-5 left-20">
+      <img src={Camada} alt="Camada Quadrada" className="h-[120px] w-[150px]" />
+    </div>
+    <div className="absolute top-0 right-0">
+      <img src={Elipse1} alt="Elipse 1" className="h-100 w-130"/>
+    </div>
+    <div className="absolute top-15 left-0">
+      <img src={Elipse2} alt="Elipse 2" />
+    </div>
+    <div className="bg-black text-white min-w-[1100px] min-h-[450px] flex flex-col items-center relative">
+        <div className="flex">
+            <img src={Github} alt="Github Icon" className="h-[50px] w-50-[px]" />
+            <h1 className="text-5xl"> Perfil<span>Github</span></h1>
         </div>       
         <div>
         <input className="text-white"type="text" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
@@ -99,5 +114,6 @@ export const GetUserGithub = () : ReactElement => {
           <p>{error}</p>
         }
     </div>
+    </main>
   )
 }
