@@ -1,10 +1,12 @@
 import { ReactElement, useEffect, useState } from "react"
 import { getUser } from "../../api/getUser"
 import { ApiData } from "../../interfaces/types"
-import  Github  from "../../assets/icon_git.png";
+import  LogoGithub  from "../../assets/icon_git.png";
+import  GitName from "../../assets/Githubname.png";
 import  Camada  from "../../assets/Camada.png";
 import  Elipse1  from "../../assets/Ellipse_1.png";
 import  Elipse2  from "../../assets/Ellipse_2.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const GetUserGithub = () : ReactElement => {
     const [nameuser, setNameUser] = useState<string>('')
@@ -88,14 +90,19 @@ export const GetUserGithub = () : ReactElement => {
     <div className="absolute top-15 left-0">
       <img src={Elipse2} alt="Elipse 2" />
     </div>
-    <div className="bg-black text-white min-w-[1100px] min-h-[450px] flex flex-col items-center relative">
-        <div className="flex">
-            <img src={Github} alt="Github Icon" className="h-[50px] w-50-[px]" />
-            <h1 className="text-5xl"> Perfil<span>Github</span></h1>
+    <div className="bg-black text-white min-w-[1100px] min-h-[450px] flex flex-col items-center relative ">
+        <div className="flex justify-center items-center m-10">
+        {/* <span className="ml-[10px] font-black"></span> */}
+            <img src={LogoGithub} alt="Github Icon" className="h-[50px] w-50-[px]" />
+            <div className="flex items-center gap-2">
+            <h1 className="text-5xl ml-[10px]"> Perfil</h1>
+            <img src={GitName} alt="name" className="h-[38px]"/>
+            </div>
         </div>       
-        <div>
-        <input className="text-white"type="text" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
+        <div className="flex items-center bg-white text-black border-borderborder-1 rounded-lg h-12 p-4 ml-4">
+        <input className="w-110 h-12 focus:outline-none placeholder-black font-medium"type="search" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
         <span onClick={haddleUser}>&#128269;</span>  
+        {/* <FontAwesomeIcon icon="fa-thin fa-magnifying-glass" /> */}
         </div>
 
         {loading && 
