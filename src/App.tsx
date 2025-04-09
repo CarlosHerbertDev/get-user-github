@@ -5,12 +5,6 @@ function App() {
 
   return (
     <>
-         {/* <div className="absolute top-0 right-0">
-      <img src={Elipse1} alt="Elipse 1" className=""/>
-    </div>
-    <div className="absolute top-0 left-0">
-      <img src={Elipse2} alt="Elipse 2" />
-    </div> */}
       <GetUserGithub />
     </>
   )

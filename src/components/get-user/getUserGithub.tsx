@@ -73,6 +73,7 @@ export const GetUserGithub = () : ReactElement => {
 
           if (user === '') {
             alert('Atenção! Prenche o input com o nome do usuário')
+            setNameUser(user)
             setError('')
           } else {
             setNameUser(user)
@@ -91,9 +92,8 @@ export const GetUserGithub = () : ReactElement => {
     <div className="absolute left-[-150px]">
       <img src={Elipse2} alt="Elipse 2" />
     </div>
-    <div className="bg-black text-white min-w-[1100px] min- h-[450px] flex flex-col items-center relative">
+    <div className="bg-black text-white w-[1100px] min- h-[450px] flex flex-col items-center relative">
         <div className="flex justify-center items-center m-10">
-        {/* <span className="ml-[10px] font-black"></span> */}
             <img src={LogoGithub} alt="Github Icon" className="h-[50px] w-50-[px]" />
             <div className="flex items-center gap-2">
             <h1 className="text-5xl ml-[10px]"> Perfil</h1>
@@ -102,7 +102,7 @@ export const GetUserGithub = () : ReactElement => {
         </div>       
         <div className="flex items-center bg-white text-black rounded-lg h-12 py-4 pl-4 ml-4">
         <input className="w-110 h-12 focus:outline-none placeholder-black font-medium"  type="search" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
-        <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white bg-lupa rounded-lg p-[15px] border-border border-1 " onClick={haddleUser}/>
+        <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white bg-lupa rounded-lg p-[15px] border-border border-1 cursor-pointer" onClick={haddleUser}/>
         </div>
 
         {loading && 
@@ -118,7 +118,9 @@ export const GetUserGithub = () : ReactElement => {
         }
 
         { error !== '' &&
-          <p>{error}</p>
+        <div className="flex flex-col items-center justify-center mt-10 bg-bgerror text-texterror py-2 px-30 rounded-lg">
+          <p className="w-[400px] text-center">{error}</p>
+        </div>
         }
     </div>
     </main>
