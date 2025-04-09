@@ -3,16 +3,16 @@
 @import "tailwindcss";
 
 
- @theme {
+@theme {
     --color-primary: #1F1F1F;
     --font-primary: 'Nunito Sans', sans-serif;
-    --color-border: #DDDDDD
+    --color-border: #DDDDDD;
+    --color-lupa: #005CFF;
   }
 
 
   @layer base {
     body {
-     @apply bg-primary flex items-center justify-center h-screen max-w-[1440px] font-primary;
+      @apply bg-primary flex items-center justify-center h-screenw max-w-[1440px] font-primary my-0 mx-auto;
     }
   }
-   
