@@ -118,8 +118,8 @@ export const GetUserGithub = () : ReactElement => {
         }
 
         { error !== '' &&
-        <div className="flex flex-col items-center justify-center mt-10 bg-bgerror text-texterror py-2 px-30 rounded-lg">
-          <p className="w-[400px] text-center">{error}</p>
+        <div className="flex flex-col items-center justify-center mt-10 bg-bgerror text-texterror py-2 px-25 rounded-lg">
+          <p className="w-[500px] text-center text-xl">{error}</p>
         </div>
         }
     </div>

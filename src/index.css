@@ -16,6 +16,6 @@
 
   @layer base {
     body {
-      @apply bg-primary flex items-center justify-center h-screen max-w-[1440px] font-primary my-0 mx-auto overflow-hidden;
+      @apply bg-primary flex items-center justify-center h-screen font-primary my-0 mx-auto overflow-hidden;
     }
   }
