@@ -7,9 +7,9 @@
     --color-primary: #1F1F1F;
     --font-primary: 'Nunito Sans', sans-serif;
     --color-border: #DDDDDD;
-    --color-lupa: #005CFF;
+    --color-secundary: #005CFF;
     --breakpoint-sm: 1165px;
-    --color-bgerror: #D9D9D9;
+    --color-bgGray: #D9D9D9;
     --color-texterror: #FF0000;
   }
 
@@ -17,5 +17,11 @@
   @layer base {
     body {
       @apply bg-primary flex items-center justify-center h-screen font-primary my-0 mx-auto overflow-hidden;
+    }
+  }
+
+  @layer components {
+    .dot {
+      @apply w-[10px] h-[10px] rounded-full bg-bgGray;
     }
   }

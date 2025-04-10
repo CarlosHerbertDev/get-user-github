@@ -8,6 +8,7 @@ import  Elipse1  from "../../assets/Ellipse_1.png";
 import  Elipse2  from "../../assets/Ellipse_2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import LoadingThreeDotsJumping from "../../animation";
 
 export const GetUserGithub = () : ReactElement => {
     const [nameuser, setNameUser] = useState<string>('')
@@ -92,7 +93,7 @@ export const GetUserGithub = () : ReactElement => {
     <div className="absolute left-[-150px]">
       <img src={Elipse2} alt="Elipse 2" />
     </div>
-    <div className="bg-black text-white w-[1100px] min- h-[450px] flex flex-col items-center relative">
+    <div className="bg-black text-white w-[1100px] min-h-[480px] flex flex-col items-center relative">
         <div className="flex justify-center items-center m-10">
             <img src={LogoGithub} alt="Github Icon" className="h-[50px] w-50-[px]" />
             <div className="flex items-center gap-2">
@@ -100,28 +101,32 @@ export const GetUserGithub = () : ReactElement => {
             <img src={GitName} alt="name" className="h-[38px]"/>
             </div>
         </div>       
-        <div className="flex items-center bg-white text-black rounded-lg h-12 py-4 pl-4 ml-4">
+        <div className="flex items-center justify-center bg-white text-black rounded-lg h-12 py-4 pl-4 ml-4">
         <input className="w-110 h-12 focus:outline-none placeholder-black font-medium"  type="search" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
-        <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white bg-lupa rounded-lg p-[15px] border-border border-1 cursor-pointer" onClick={haddleUser}/>
+        <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white bg-secundary rounded-lg p-[15px] border-border border-1 cursor-pointer" onClick={haddleUser}/>
         </div>
+      <div className="flex flex-col items-center justify-center mt-10">
 
-        {loading && 
-              <p>CARREGANDO...</p>
+        {!loading && 
+            LoadingThreeDotsJumping()
         }
         {renderUser && !loading &&
-            <div>
-              <h1>{renderUser.name}</h1>
-              <p>{renderUser.bio? renderUser.bio : 'sem bio'}</p>
-              <img src={renderUser.avatar_url} alt="image" />
+            <div className="flex items-center justify-center bg-bgGray text-black py-5 px-6 rounded-3xl gap-8 max-w-[750px]">
+              <img src={renderUser.avatar_url} alt="imagem do perfil"  className="w-[200px] h-[200px] rounded-[50%] border-2 border-solid border-secundary"/>
+              <div className="flex flex-col items-start justify-center gap-4">
+              <h2 className="text-secundary font-bold">{renderUser.name? renderUser.name : 'Usuário sem nome'}</h2>
+              <p>{renderUser.bio? renderUser.bio : 'Usuário sem bio'}</p>
+              </div>
             </div>
       
         }
 
-        { error !== '' &&
-        <div className="flex flex-col items-center justify-center mt-10 bg-bgerror text-texterror py-2 px-25 rounded-lg">
+        { error !== '' && !loading && 
+        <div className="flex flex-col items-center justify-center bg-bgGray text-texterror py-4 px-25 rounded-lg">
           <p className="w-[500px] text-center text-xl">{error}</p>
         </div>
         }
+      </div>
     </div>
     </main>
   )
