@@ -25,24 +25,7 @@ function LoadingThreeDotsJumping() {
             <motion.div className="dot" variants={dotVariants} />
             <motion.div className="dot" variants={dotVariants} />
             <motion.div className="dot" variants={dotVariants} />
-            <StyleSheet />
         </motion.div>
-    )
-}
-
-/**
- * ==============   Styles   ================
- */
-function StyleSheet() {
-    return (
-        <style>
-            {`
-          
-            .dot {
-              
-            }
-            `}
-        </style>
     )
 }
 

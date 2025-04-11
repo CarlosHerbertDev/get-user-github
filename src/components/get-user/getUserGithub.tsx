@@ -14,19 +14,19 @@ export const GetUserGithub = () : ReactElement => {
     const [error, setError] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(true)
     useEffect(() => {
+
       const fetchdata = async () => {
 
-          setLoading(true)
-
-          try {
-
-            const data = await getUser(nameuser)
-            console.log(renderUser)
-            setLoading(false)
+        setLoading(true)
+  
+        try {
+            
+          const data = await getUser(nameuser)
+          console.log(renderUser)
             setRenderUser(data)
-
-        if (data) {
-            setRenderUser({
+            
+            if (data) {
+              setRenderUser({
               name: data.name,
               avatar_url: data.avatar_url,
               bio: data.bio
@@ -37,11 +37,15 @@ export const GetUserGithub = () : ReactElement => {
           } 
 
           } catch (error) {
-
-              setError(`Ocorreru o seguinte erro ao carregar os dados: ${error}`)
+            
+            setError(`Ocorreru o seguinte erro ao carregar os dados: ${error}`)
             
           } finally {
-            setLoading(false)
+            
+              setTimeout(() => {
+                setLoading(false)
+              }, 1000)
+          
           }
 
           }    
@@ -82,42 +86,42 @@ export const GetUserGithub = () : ReactElement => {
   return (
     <main className="relative max-w-[1440px]">
     <div className="absolute top-[-100px] left-[-70px]">
-      <img src={Camada} alt="Camada Quadrada" className="h-[200px] w-[250px]" />
+      <img src={Camada} alt="Camada Quadrada" className="h-[180px] w-[200px]" />
     </div>
-    <div className="h-[700px] absolute right-[-330px] top-[-330px] circle"></div>
-      <div className="h-[500px] absolute left-[-630px] top-[80px] circle"></div>
+    <div className="h-[500px] absolute right-[-370px] top-[-330px] circle"></div>
+      <div className="h-[400px] absolute left-[-630px] top-[150px] circle"></div>
     <div className="bg-black text-white w-[1100px] min-h-[480px] flex flex-col items-center relative">
         <div className="flex justify-center items-center m-10">
             <img src={LogoGithub} alt="Github Icon" className="h-[50px] w-50-[px]" />
             <div className="flex items-center gap-2">
-            <h1 className="text-5xl ml-[10px]"> Perfil</h1>
-            <img src={GitName} alt="name" className="h-[38px]"/>
+                <h1 className="text-5xl ml-[10px]"> Perfil</h1>
+                <img src={GitName} alt="name" className="h-[38px]"/>
             </div>
         </div>       
         <div className="flex items-center justify-center bg-white text-black rounded-lg h-12 py-4 pl-4 ml-4">
-        <input  className="w-110 h-12 focus:outline-none placeholder-black font-medium"  type="search" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
-        <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white bg-secundary rounded-lg p-[15px] border-border border-1 cursor-pointer" onClick={haddleUser}/>
+            <input  className="w-110 h-12 focus:outline-none placeholder-black font-medium"  type="search" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white bg-secundary rounded-lg p-[15px] border-border border-1 cursor-pointer" onClick={haddleUser}/>
         </div>
-      <div className="flex flex-col items-center justify-center mt-10">
+        <div className="flex flex-col items-center justify-center mt-7">
 
         {loading && 
             LoadingThreeDotsJumping()
         }
         {renderUser && !loading &&
-            <div className="flex items-center justify-center bg-bgGray text-black py-5 px-6 rounded-3xl gap-8 max-w-[750px]">
-              <img src={renderUser.avatar_url} alt="imagem do perfil"  className="w-[200px] h-[200px] rounded-[50%] border-2 border-solid border-secundary"/>
-              <div className="flex flex-col items-start justify-center gap-4">
-              <h2 className="text-secundary font-bold">{renderUser.name? renderUser.name : 'Usuário sem nome'}</h2>
-              <p>{renderUser.bio? renderUser.bio : 'Usuário sem bio'}</p>
+            <div className="flex items-center justify-center bg-bgGray text-black py-5 px-6 rounded-3xl gap-5 max-w-[750px]">
+                <img src={renderUser.avatar_url} alt="imagem do perfil"  className="w-[200px] h-[200px] rounded-[50%] border-2 border-solid border-secundary"/>
+                <div className="flex flex-col items-start justify-center gap-4">
+                    <h2 className="text-secundary font-bold">{renderUser.name? renderUser.name : 'Usuário sem nome'}</h2>
+                    <p>{renderUser.bio? renderUser.bio : 'Usuário sem bio'}</p>
               </div>
             </div>
       
         }
 
         { error !== '' && !loading && 
-        <div className="flex flex-col items-center justify-center bg-bgGray text-texterror py-4 px-25 rounded-lg">
-          <p className="w-[500px] text-center text-xl">{error}</p>
-        </div>
+          <div className="flex flex-col items-center justify-center bg-bgGray text-texterror py-4 px-25 rounded-lg">
+              <p className="w-[500px] text-center text-xl">{error}</p>
+          </div>
         }
       </div>
     </div>

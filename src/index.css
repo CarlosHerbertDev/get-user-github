@@ -2,28 +2,6 @@
 
 @import "tailwindcss";
 
-
-/* .circle {
-  width: 700px;
-  height: 700px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #0579ff 0%, #002c5b 40%, #000 60%);
-  filter: blur(80px);
-}
-
-.glow-circle {
-  width: 700px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    #0579ff 0%,
-    #002c5b 40%,
-    rgba(0, 0, 0, 0) 60%
-  );
-  filter: blur(80px);
-} */
-
 @theme {
     --color-primary: #1F1F1F;
     --font-primary: 'Nunito Sans', sans-serif;
