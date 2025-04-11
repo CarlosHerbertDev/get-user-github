@@ -4,8 +4,6 @@ import { ApiData } from "../../interfaces/types"
 import  LogoGithub  from "../../assets/icon_git.png";
 import  GitName from "../../assets/Githubname.png";
 import  Camada  from "../../assets/Camada.png";
-import  Elipse1  from "../../assets/Ellipse_1.png";
-import  Elipse2  from "../../assets/Ellipse_2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import LoadingThreeDotsJumping from "../../animation";
@@ -69,7 +67,6 @@ export const GetUserGithub = () : ReactElement => {
         }
 
         function haddleUser() {
-          
           const user: string = (document.querySelector('input') as HTMLInputElement).value;
 
           if (user === '') {
@@ -84,15 +81,11 @@ export const GetUserGithub = () : ReactElement => {
         
   return (
     <main className="relative max-w-[1440px]">
-    <div className="absolute top-[-70px] left-[-50px]">
-      <img src={Camada} alt="Camada Quadrada" className="h-[120px] w-[150px]" />
+    <div className="absolute top-[-100px] left-[-70px]">
+      <img src={Camada} alt="Camada Quadrada" className="h-[200px] w-[250px]" />
     </div>
-    <div className="absolute right-[-140px] top-[-90px]">
-      <img src={Elipse1} alt="Elipse 1" className="h-100 w-130"/>
-    </div>
-    <div className="absolute left-[-150px]">
-      <img src={Elipse2} alt="Elipse 2" />
-    </div>
+    <div className="h-[700px] absolute right-[-330px] top-[-330px] circle"></div>
+      <div className="h-[500px] absolute left-[-630px] top-[80px] circle"></div>
     <div className="bg-black text-white w-[1100px] min-h-[480px] flex flex-col items-center relative">
         <div className="flex justify-center items-center m-10">
             <img src={LogoGithub} alt="Github Icon" className="h-[50px] w-50-[px]" />
@@ -102,12 +95,12 @@ export const GetUserGithub = () : ReactElement => {
             </div>
         </div>       
         <div className="flex items-center justify-center bg-white text-black rounded-lg h-12 py-4 pl-4 ml-4">
-        <input className="w-110 h-12 focus:outline-none placeholder-black font-medium"  type="search" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
+        <input  className="w-110 h-12 focus:outline-none placeholder-black font-medium"  type="search" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
         <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white bg-secundary rounded-lg p-[15px] border-border border-1 cursor-pointer" onClick={haddleUser}/>
         </div>
       <div className="flex flex-col items-center justify-center mt-10">
 
-        {!loading && 
+        {loading && 
             LoadingThreeDotsJumping()
         }
         {renderUser && !loading &&

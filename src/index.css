@@ -3,6 +3,27 @@
 @import "tailwindcss";
 
 
+/* .circle {
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #0579ff 0%, #002c5b 40%, #000 60%);
+  filter: blur(80px);
+}
+
+.glow-circle {
+  width: 700px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    #0579ff 0%,
+    #002c5b 40%,
+    rgba(0, 0, 0, 0) 60%
+  );
+  filter: blur(80px);
+} */
+
 @theme {
     --color-primary: #1F1F1F;
     --font-primary: 'Nunito Sans', sans-serif;
@@ -11,6 +32,7 @@
     --breakpoint-sm: 1165px;
     --color-bgGray: #D9D9D9;
     --color-texterror: #FF0000;
+    --color-bgtest: radial-gradient(circle, #0579ff 0%, #002c5b 40%, #000 60%);
   }
 
 
@@ -24,4 +46,8 @@
     .dot {
       @apply w-[10px] h-[10px] rounded-full bg-bgGray;
     }
+  }
+
+  @utility circle {
+        @apply w-[700px] rounded-full bg-[radial-gradient(circle,_#0579ff_0%,_#002c5b_40%,_#000_60%)] blur-[80px];
   }
