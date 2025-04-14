@@ -18,6 +18,7 @@
     "@tailwindcss/vite": "^4.1.1",
     "axios": "^1.8.4",
     "motion": "^12.6.3",
+    "motion-plus": "^0.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwindcss": "^4.1.1"

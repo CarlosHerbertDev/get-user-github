@@ -1,32 +1,34 @@
 import { ReactElement, useEffect, useState } from "react"
 import { getUser } from "../../api/getUser"
 import { ApiData } from "../../interfaces/types"
-import  LogoGithub  from "../../assets/icon_git.png";
+import  LogoGithub  from "../../../public/icon_git.png";
 import  GitName from "../../assets/Githubname.png";
 import  Camada  from "../../assets/Camada.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import LoadingThreeDotsJumping from "../../animation";
+import { motion } from "motion/react";
 
 export const GetUserGithub = () : ReactElement => {
     const [nameuser, setNameUser] = useState<string>('')
     const [renderUser, setRenderUser] = useState<ApiData>({})
     const [error, setError] = useState<string>('')
     const [loading, setLoading] = useState<boolean>(true)
+    
     useEffect(() => {
-
       const fetchdata = async () => {
-
-        setLoading(true)
-  
         try {
-            
+          if (nameuser !== '') {
+            setLoading(true)
+          } else {
+            setLoading(false)
+          }
           const data = await getUser(nameuser)
-          console.log(renderUser)
-            setRenderUser(data)
-            
-            if (data) {
-              setRenderUser({
+          
+          setRenderUser(data)
+          
+          if (data) {  
+            setRenderUser({
               name: data.name,
               avatar_url: data.avatar_url,
               bio: data.bio
@@ -35,17 +37,14 @@ export const GetUserGithub = () : ReactElement => {
           } else if(data === undefined){
             setError('Nenhum perfil encontrado com esse nome de usuário. Tente novamente')
           } 
-
           } catch (error) {
             
             setError(`Ocorreru o seguinte erro ao carregar os dados: ${error}`)
             
           } finally {
-            
               setTimeout(() => {
                 setLoading(false)
               }, 1000)
-          
           }
 
           }    
@@ -88,9 +87,18 @@ export const GetUserGithub = () : ReactElement => {
     <div className="absolute top-[-100px] left-[-70px]">
       <img src={Camada} alt="Camada Quadrada" className="h-[180px] w-[200px]" />
     </div>
-    <div className="h-[500px] absolute right-[-370px] top-[-330px] circle"></div>
+    <div className="h-[500px] absolute right-[-350px] top-[-280px] circle"></div>
       <div className="h-[400px] absolute left-[-630px] top-[150px] circle"></div>
-    <div className="bg-black text-white w-[1100px] min-h-[480px] flex flex-col items-center relative">
+    <motion.div 
+        className="bg-black text-white w-[1100px] min-h-[480px] flex flex-col items-center relative"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+            duration: 1.4,
+            scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+        }}
+  
+    >
         <div className="flex justify-center items-center m-10">
             <img src={LogoGithub} alt="Github Icon" className="h-[50px] w-50-[px]" />
             <div className="flex items-center gap-2">
@@ -98,24 +106,31 @@ export const GetUserGithub = () : ReactElement => {
                 <img src={GitName} alt="name" className="h-[38px]"/>
             </div>
         </div>       
-        <div className="flex items-center justify-center bg-white text-black rounded-lg h-12 py-4 pl-4 ml-4">
-            <input  className="w-110 h-12 focus:outline-none placeholder-black font-medium"  type="search" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
+        <motion.div 
+        className="flex items-center justify-center bg-white text-black rounded-lg h-12 py-4 pl-4 ml-4"
+        whileHover={{ scale: 1.2 }}
+        >
+            <input className="w-110 h-12 focus:outline-none placeholder-black font-medium"  type="text" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
             <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white bg-secundary rounded-lg p-[15px] border-border border-1 cursor-pointer" onClick={haddleUser}/>
-        </div>
+        </motion.div>
         <div className="flex flex-col items-center justify-center mt-7">
-
         {loading && 
             LoadingThreeDotsJumping()
         }
         {renderUser && !loading &&
-            <div className="flex items-center justify-center bg-bgGray text-black py-5 px-6 rounded-3xl gap-5 max-w-[750px]">
+            <motion.div 
+            className="flex items-center justify-center bg-bgGray text-black py-5 px-6 rounded-3xl gap-5 max-w-[750px]"
+            initial={{ opacity: 0, y: 20 }} // Começa invisível e deslocado
+            whileInView={{ opacity: 1, y: 0 }} // Torna-se visível e retorna para a posição original
+            transition={{ duration: 1.2  }} // Duração da animação  
+            viewport={{ once: true }}
+            >
                 <img src={renderUser.avatar_url} alt="imagem do perfil"  className="w-[200px] h-[200px] rounded-[50%] border-2 border-solid border-secundary"/>
                 <div className="flex flex-col items-start justify-center gap-4">
                     <h2 className="text-secundary font-bold">{renderUser.name? renderUser.name : 'Usuário sem nome'}</h2>
                     <p>{renderUser.bio? renderUser.bio : 'Usuário sem bio'}</p>
               </div>
-            </div>
-      
+            </motion.div>
         }
 
         { error !== '' && !loading && 
@@ -124,7 +139,7 @@ export const GetUserGithub = () : ReactElement => {
           </div>
         }
       </div>
-    </div>
+    </motion.div>
     </main>
   )
 }
