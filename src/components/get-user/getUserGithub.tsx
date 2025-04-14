@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import LoadingThreeDotsJumping from "../../animation";
 import { motion } from "motion/react";
+import SplitText from "../../animation3";
 
 export const GetUserGithub = () : ReactElement => {
     const [nameuser, setNameUser] = useState<string>('')
@@ -25,6 +26,10 @@ export const GetUserGithub = () : ReactElement => {
           }
           const data = await getUser(nameuser)
           
+          if (data === null) {   
+            console.log(data);
+          }
+
           setRenderUser(data)
           
           if (data) {  
@@ -44,7 +49,7 @@ export const GetUserGithub = () : ReactElement => {
           } finally {
               setTimeout(() => {
                 setLoading(false)
-              }, 1000)
+              }, 1500)
           }
 
           }    
@@ -95,7 +100,7 @@ export const GetUserGithub = () : ReactElement => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{
             duration: 1.4,
-            scale: { type: "spring", visualDuration: 0.4, bounce: 0.5 },
+            scale: { type: "spring", visualDuration: 0.8, bounce: 0.5 },
         }}
   
     >
@@ -115,7 +120,7 @@ export const GetUserGithub = () : ReactElement => {
         </motion.div>
         <div className="flex flex-col items-center justify-center mt-7">
         {loading && 
-            LoadingThreeDotsJumping()
+            <LoadingThreeDotsJumping />
         }
         {renderUser && !loading &&
             <motion.div 
@@ -128,7 +133,8 @@ export const GetUserGithub = () : ReactElement => {
                 <img src={renderUser.avatar_url} alt="imagem do perfil"  className="w-[200px] h-[200px] rounded-[50%] border-2 border-solid border-secundary"/>
                 <div className="flex flex-col items-start justify-center gap-4">
                     <h2 className="text-secundary font-bold">{renderUser.name? renderUser.name : 'Usuário sem nome'}</h2>
-                    <p>{renderUser.bio? renderUser.bio : 'Usuário sem bio'}</p>
+                    <p>{renderUser.bio? <SplitText text={renderUser.bio} /> : 'Usuário sem bio'}</p>
+                    
               </div>
             </motion.div>
         }
