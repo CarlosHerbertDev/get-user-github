@@ -6,9 +6,9 @@ import  GitName from "../../assets/Githubname.png";
 import  Camada  from "../../assets/Camada.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import LoadingThreeDotsJumping from "../../animation";
+import LoadingThreeDotsJumping from "../animation/loading";
 import { motion } from "motion/react";
-import SplitText from "../../animation3";
+import SplitText from "../animation/render_text";
 
 export const GetUserGithub = () : ReactElement => {
     const [nameuser, setNameUser] = useState<string>('')
@@ -115,7 +115,7 @@ export const GetUserGithub = () : ReactElement => {
         className="flex items-center justify-center bg-white text-black rounded-lg h-12 py-4 pl-4 ml-4"
         whileHover={{ scale: 1.2 }}
         >
-            <input className="w-110 h-12 focus:outline-none placeholder-black font-medium"  type="text" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
+            <input className="w-110 h-12 focus:outline-none placeholder-black font-medium"  type="search" placeholder="Digite um usuário do Github" onKeyUp={halldeKeyup}/>
             <FontAwesomeIcon icon={faMagnifyingGlass} className="text-white bg-secundary rounded-lg p-[15px] border-border border-1 cursor-pointer" onClick={haddleUser}/>
         </motion.div>
         <div className="flex flex-col items-center justify-center mt-7">
@@ -125,24 +125,32 @@ export const GetUserGithub = () : ReactElement => {
         {renderUser && !loading &&
             <motion.div 
             className="flex items-center justify-center bg-bgGray text-black py-5 px-6 rounded-3xl gap-5 max-w-[750px]"
-            initial={{ opacity: 0, y: 20 }} // Começa invisível e deslocado
-            whileInView={{ opacity: 1, y: 0 }} // Torna-se visível e retorna para a posição original
-            transition={{ duration: 1.2  }} // Duração da animação  
+            initial={{ opacity: 0, y: 20 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 1.2  }} 
             viewport={{ once: true }}
             >
                 <img src={renderUser.avatar_url} alt="imagem do perfil"  className="w-[200px] h-[200px] rounded-[50%] border-2 border-solid border-secundary"/>
                 <div className="flex flex-col items-start justify-center gap-4">
                     <h2 className="text-secundary font-bold">{renderUser.name? renderUser.name : 'Usuário sem nome'}</h2>
-                    <p>{renderUser.bio? <SplitText text={renderUser.bio} /> : 'Usuário sem bio'}</p>
+                    <p className="max-w-[450px]">{renderUser.bio? <SplitText text={renderUser.bio} /> : 'Usuário sem bio'}</p>
                     
               </div>
             </motion.div>
         }
 
         { error !== '' && !loading && 
-          <div className="flex flex-col items-center justify-center bg-bgGray text-texterror py-4 px-25 rounded-lg">
-              <p className="w-[500px] text-center text-xl">{error}</p>
-          </div>
+          <motion.div 
+          className="flex flex-col items-center justify-center bg-bgGray text-texterror py-4 px-25 rounded-lg"
+          initial={{ opacity: 0, y: 20 }} 
+          whileInView={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 1.2  }} 
+          viewport={{ once: true }}
+          >
+              <div className="w-[500px] text-center text-xl">
+              <SplitText text={error} />
+              </div>
+          </motion.div>
         }
       </div>
     </motion.div>
